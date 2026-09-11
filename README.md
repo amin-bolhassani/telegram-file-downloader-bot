@@ -1,53 +1,41 @@
-# Iran Market Telegram Bot
+# Telegram File Downloader Bot
 
-A Telegram bot built with Python that provides real-time gold and currency prices using the BRS API. The bot allows users to retrieve market information directly from Telegram and receive fast, accurate, and well-formatted responses.
+A lightweight Telegram bot built with Python that allows users to download files from direct URLs and receive them directly in Telegram.
 
-This project was developed to practice working with APIs, asynchronous programming, error handling, environment variables, and Telegram bot development.
+The project was developed to practice working with HTTP requests, file handling, environment variables, error handling, logging, and Telegram bot development using Python.
 
 ---
 
 ## Features
 
-* Real-time gold price updates
-* Real-time currency exchange rates
-* Telegram bot integration
-* API communication using HTTP requests
-* Error handling for connection and timeout exceptions
-* Secure storage of sensitive information using environment variables
-* Clean and maintainable code structure
-
----
-
-## Supported Data
-
-The bot can retrieve information such as:
-
-* Gold prices
-* Foreign exchange rates
-* Market symbols
-* Units and formatted prices
+* Download files from direct URLs
+* Send downloaded files directly to Telegram
+* Stream files to reduce memory usage
+* Automatically delete temporary files after sending
+* Environment variable support for secure bot configuration
+* Basic error handling and logging
+* Simple and maintainable project structure
 
 ---
 
 ## Technologies Used
 
 * Python
-* Python Telegram Bot
+* pyTelegramBotAPI
 * Requests
-* Python Dotenv
-* BRS API
+* python-dotenv
 
 ---
 
 ## Project Structure
 
 ```text
-iran-market-telegram-bot/
+telegram-file-downloader-bot/
 │
 ├── bot.py
 ├── requirements.txt
 ├── .gitignore
-├── .env
+├── .env.example
 └── README.md
 ```
 
@@ -58,13 +46,13 @@ iran-market-telegram-bot/
 Clone the repository:
 
 ```bash
-git clone https://github.com/amin-bolhassani/iran-market-telegram-bot.git
+git clone https://github.com/amin-bolhassani/telegram-file-downloader-bot.git
 ```
 
 Move to the project directory:
 
 ```bash
-cd iran-market-telegram-bot
+cd telegram-file-downloader-bot
 ```
 
 Install the required packages:
@@ -77,45 +65,121 @@ pip install -r requirements.txt
 
 ## Environment Variables
 
-Create a `.env` file and add the following variables:
+Create a `.env` file based on `.env.example`:
 
-```text
-BOT_TOKEN=your_telegram_bot_token
-BRSAPI_KEY=your_api_key
+```env
+file_downloader_token=your_telegram_bot_token
 ```
+
+Replace `your_telegram_bot_token` with your actual Telegram bot token.
+
+**Never upload your `.env` file or expose your bot token publicly.**
 
 ---
 
 ## Usage
 
-Run the project with the following command:
+Run the bot with:
 
 ```bash
 python bot.py
+```
+
+Open the bot in Telegram and send:
+
+```text
+/start
+```
+
+Then send a direct URL to a file.
+
+For example:
+
+```text
+https://example.com/file.zip
+```
+
+The bot will download the file and send it back to you through Telegram.
+
+---
+
+## How It Works
+
+```text
+User
+  ↓
+Sends a file URL
+  ↓
+Bot receives the URL
+  ↓
+Requests downloads the file
+  ↓
+File is temporarily stored
+  ↓
+Bot uploads the file to Telegram
+  ↓
+Temporary file is deleted
 ```
 
 ---
 
 ## Error Handling
 
-The application handles several common situations, including:
+The bot handles common errors during the download and upload process, including:
 
 * Connection errors
 * Request timeouts
-* Missing data
-* Invalid symbols
+* Invalid responses
+* Download failures
 * Unexpected exceptions
+
+Errors are also logged using Python logging.
+
+---
+
+## Limitations
+
+This project is designed primarily for **direct file URLs**.
+
+Some websites may not work because they:
+
+* Require authentication
+* Use temporary download links
+* Require cookies or special headers
+* Redirect to web pages instead of files
+* Block automated requests
+* Use unsupported server configurations
 
 ---
 
 ## Future Improvements
 
-* Support for cryptocurrencies
-* Historical price analysis
-* Price alerts and notifications
-* Database integration
-* Logging support
+Possible future improvements include:
+
+* File size limits
+* Better URL validation
+* Improved filename handling
+* Download progress updates
+* Support for additional download services
+* More advanced error handling
+* Security improvements for public deployment
 * Docker support
+
+---
+
+## What I Learned
+
+Building this project helped me practice:
+
+* Telegram bot development
+* HTTP requests with `requests`
+* Streaming file downloads
+* File handling in Python
+* Environment variables
+* `.env` configuration
+* Exception handling
+* Logging
+* Temporary file management
 
 ---
 
